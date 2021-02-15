@@ -18,6 +18,9 @@ public class User implements Serializable {
 	private String email;
 	private String password;
 
+	@OneToMany(mappedBy = "user")
+	private Set<Notification> notifications = new HashSet<>();
+
 	@ManyToMany
 	@JoinTable(name = "tb_user_role", joinColumns = @JoinColumn(name = "user_id"),
 	 inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -67,6 +70,10 @@ public class User implements Serializable {
 
 	public Set<Role> getRoles() {
 		return roles;
+	}
+
+	public Set<Notification> getNotifications() {
+		return notifications;
 	}
 
 	@Override
