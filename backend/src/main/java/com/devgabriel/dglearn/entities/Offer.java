@@ -3,7 +3,9 @@ package com.devgabriel.dglearn.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_offer")
@@ -20,6 +22,9 @@ public class Offer implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "course_id")
 	private Course course;
+
+	@OneToMany(mappedBy = "offer")
+	Set<Resource> resources = new HashSet<>();
 
 	public Offer() {
 	}
@@ -70,6 +75,10 @@ public class Offer implements Serializable {
 
 	public void setCourse(Course course) {
 		this.course = course;
+	}
+
+	public Set<Resource> getResources() {
+		return resources;
 	}
 
 	@Override
