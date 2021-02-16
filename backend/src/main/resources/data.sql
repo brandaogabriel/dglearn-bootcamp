@@ -37,6 +37,22 @@ INSERT INTO tb_section (title, description, position, img_uri, resource_id, prer
 INSERT INTO tb_enrollment (user_id, offer_id, enroll_moment, refund_moment, available, only_update) VALUES (1, 1, TIMESTAMP WITH TIME ZONE '2020-01-04T10:00:00', null, true, false);
 INSERT INTO tb_enrollment (user_id, offer_id, enroll_moment, refund_moment, available, only_update) VALUES (2, 1, TIMESTAMP WITH TIME ZONE '2020-01-04T10:00:00', null, true, false);
 
+-- Lessons from Section
+INSERT INTO tb_lesson (title, position, section_id) VALUES ('Aula do Capitulo 1', 1, 1);
+INSERT INTO tb_content (id, text_content, video_uri) VALUES (1, 'Material de apoio: abc', 'https://youtube.com');
+
+INSERT INTO tb_lesson (title, position, section_id) VALUES ('Aula do Capitulo 2', 2, 1);
+INSERT INTO tb_content (id, text_content, video_uri) VALUES (2, '', 'https://youtube.com');
+
+INSERT INTO tb_lesson (title, position, section_id) VALUES ('Aula do Capitulo 3', 3, 1);
+INSERT INTO tb_content (id, text_content, video_uri) VALUES (3, '', 'https://youtube.com');
+
+INSERT INTO tb_lesson (title, position, section_id) VALUES ('Tarefa do capitulo 1', 4, 1);
+INSERT INTO tb_task (id, description, question_count, approval_count, weight, due_date) VALUES (4, 'Faça uma tarefa legal', 5, 3, 1.0, TIMESTAMP WITH TIME ZONE '2020-01-20T15:00:00');
+
+INSERT INTO tb_lessons_done (lesson_id, user_id, offer_id) VALUES (1, 1, 1);
+INSERT INTO tb_lessons_done (lesson_id, user_id, offer_id) VALUES (2, 1, 1);
+
 --  Users notifications
 INSERT INTO tb_notification (text, moment, read, route, user_id) VALUES ('Primeiro feedback de tarefa: favor revisar', TIMESTAMP WITH TIME ZONE '2020-01-10T13:00:00Z', true, '/offers/1/resource/1/sections/1', 1);
 INSERT INTO tb_notification (text, moment, read, route, user_id) VALUES ('Segundo feedback: favor revisar', TIMESTAMP WITH TIME ZONE '2020-03-05T13:00:00Z', true, '/offers/1/resource/1/sections/1', 1);
