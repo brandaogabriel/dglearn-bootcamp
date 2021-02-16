@@ -4,9 +4,7 @@ import com.devgabriel.dglearn.entities.enums.ResourceType;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_resource")
@@ -27,7 +25,7 @@ public class Resource implements Serializable {
 	private Offer offer;
 
 	@OneToMany(mappedBy = "resource")
-	private Set<Section> sections = new HashSet<>();
+	private List<Section> sections = new ArrayList<>();
 
 	public Resource() {
 	}
@@ -98,7 +96,7 @@ public class Resource implements Serializable {
 		this.offer = offer;
 	}
 
-	public Set<Section> getSections() {
+	public List<Section> getSections() {
 		return sections;
 	}
 

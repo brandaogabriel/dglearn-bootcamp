@@ -2,9 +2,7 @@ package com.devgabriel.dglearn.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_user")
@@ -19,7 +17,7 @@ public class User implements Serializable {
 	private String password;
 
 	@OneToMany(mappedBy = "user")
-	private Set<Notification> notifications = new HashSet<>();
+	private List<Notification> notifications = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_user_role", joinColumns = @JoinColumn(name = "user_id"),
@@ -72,7 +70,7 @@ public class User implements Serializable {
 		return roles;
 	}
 
-	public Set<Notification> getNotifications() {
+	public List<Notification> getNotifications() {
 		return notifications;
 	}
 
