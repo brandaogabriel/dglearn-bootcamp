@@ -16,7 +16,10 @@ public class Notification implements Serializable {
 
 	@Column(columnDefinition = "TEXT")
 	private String text;
+
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant moment;
+
 	private boolean read;
 	private String route;
 
