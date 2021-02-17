@@ -1,7 +1,9 @@
 package com.devgabriel.dglearn.services;
 
+import com.devgabriel.dglearn.dto.UserDTO;
 import com.devgabriel.dglearn.entities.User;
 import com.devgabriel.dglearn.repositories.UserRepository;
+import com.devgabriel.dglearn.services.exceptions.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -16,6 +21,13 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository repository;
+
+	@Transactional(readOnly = true)
+	public UserDTO findById(Long id) {
+		Optional<User> obj = repository.findById(id);
+		User user = obj.orElseThrow(() -> new ResourceNotFoundException("User not found"));
+		return new UserDTO(user);
+	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
