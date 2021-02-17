@@ -1,7 +1,9 @@
 package com.devgabriel.dglearn.resources.exceptions;
 
 import com.devgabriel.dglearn.services.exceptions.DatabaseException;
+import com.devgabriel.dglearn.services.exceptions.ForbiddenException;
 import com.devgabriel.dglearn.services.exceptions.ResourceNotFoundException;
+import com.devgabriel.dglearn.services.exceptions.UnauthorizedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -54,6 +56,20 @@ public class ResourceExceptionHandler {
 
 	private StandardError createStandardError(HttpStatus status, String error, String message, String requestUri) {
 		return new StandardError(Instant.now(), status.value(), error, message, requestUri);
+	}
+
+	@ExceptionHandler(ForbiddenException.class)
+	public ResponseEntity<OAuthCustomError> forbidden(ForbiddenException e, HttpServletRequest request) {
+		HttpStatus status = HttpStatus.FORBIDDEN;
+		OAuthCustomError err = new OAuthCustomError("Forbidden", e.getMessage());
+		return ResponseEntity.status(status).body(err);
+	}
+
+	@ExceptionHandler(UnauthorizedException.class)
+	public ResponseEntity<OAuthCustomError> unauthorized(UnauthorizedException e, HttpServletRequest request) {
+		HttpStatus status = HttpStatus.UNAUTHORIZED;
+		OAuthCustomError err = new OAuthCustomError("Unauthorized", e.getMessage());
+		return ResponseEntity.status(status).body(err);
 	}
 
 }
