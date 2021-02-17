@@ -59,7 +59,7 @@ INSERT INTO tb_notification (text, moment, read, route, user_id) VALUES ('Segund
 INSERT INTO tb_notification (text, moment, read, route, user_id) VALUES ('Terceiro feedback: favor revisar', TIMESTAMP WITH TIME ZONE '2020-05-21T13:00:00Z', false, '/offers/1/resource/1/sections/1', 1);
 
 -- Deliveries from lesson-enrollment
-INSERT INTO tb_deliver (uri, moment, status, feedback, correct_count, lesson_id, user_id, offer_id) VALUES ('http://github.com/brandaogabriel', TIMESTAMP WITH TIME ZONE '2020-01-14T14:50:30', 0, null, null, 4, 1, 1);
+INSERT INTO tb_deliver (uri, moment, status, feedback, correct_count, lesson_id, user_id, offer_id) VALUES ('http://github.com/brandaogabriel', TIMESTAMP WITH TIME ZONE '2020-01-14T14:50:30Z', 0, null, null, 4, 1, 1);
 
 -- Topics and likes from offers-users
 INSERT INTO tb_topic (title, body, moment, author_id, offer_id, lesson_id) VALUES ('Título do tópico 1', 'Corpo do tópico 1', TIMESTAMP WITH TIME ZONE '2020-06-13T13:00:00Z', 1, 1, 1);

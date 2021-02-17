@@ -4,6 +4,7 @@ import com.devgabriel.dglearn.entities.enums.DeliverStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
 @Entity
@@ -17,7 +18,7 @@ public class Deliver implements Serializable {
 	private String uri;
 
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private Integer moment;
+	private Instant moment;
 
 	private DeliverStatus status;
 	private String feedback;
@@ -35,7 +36,7 @@ public class Deliver implements Serializable {
 	public Deliver() {
 	}
 
-	public Deliver(Long id, String uri, Integer moment, DeliverStatus status, String feedback, Integer correctCount, Lesson lesson,
+	public Deliver(Long id, String uri, Instant moment, DeliverStatus status, String feedback, Integer correctCount, Lesson lesson,
 								 Enrollment enrollment) {
 		this.id = id;
 		this.uri = uri;
@@ -63,11 +64,11 @@ public class Deliver implements Serializable {
 		this.uri = uri;
 	}
 
-	public Integer getMoment() {
+	public Instant getMoment() {
 		return moment;
 	}
 
-	public void setMoment(Integer moment) {
+	public void setMoment(Instant moment) {
 		this.moment = moment;
 	}
 
