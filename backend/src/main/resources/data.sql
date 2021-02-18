@@ -54,9 +54,9 @@ INSERT INTO tb_lessons_done (lesson_id, user_id, offer_id) VALUES (1, 1, 1);
 INSERT INTO tb_lessons_done (lesson_id, user_id, offer_id) VALUES (2, 1, 1);
 
 -- Users notifications
-INSERT INTO tb_notification (text, moment, read, route, user_id) VALUES ('Primeiro feedback de tarefa: favor revisar', TIMESTAMP WITH TIME ZONE '2020-01-10T13:00:00Z', true, '/offers/1/resource/1/sections/1', 1);
-INSERT INTO tb_notification (text, moment, read, route, user_id) VALUES ('Segundo feedback: favor revisar', TIMESTAMP WITH TIME ZONE '2020-03-05T13:00:00Z', true, '/offers/1/resource/1/sections/1', 1);
-INSERT INTO tb_notification (text, moment, read, route, user_id) VALUES ('Terceiro feedback: favor revisar', TIMESTAMP WITH TIME ZONE '2020-05-21T13:00:00Z', false, '/offers/1/resource/1/sections/1', 1);
+INSERT INTO tb_notification (text, moment, read, route, user_id) VALUES ('Primeiro feedback de tarefa: favor revisar', TIMESTAMP WITH TIME ZONE '2020-01-10T13:00:00Z', true, '/offers/1/resources/1/sections/1', 1);
+INSERT INTO tb_notification (text, moment, read, route, user_id) VALUES ('Segundo feedback: favor revisar', TIMESTAMP WITH TIME ZONE '2020-03-05T13:00:00Z', true, '/offers/1/resources/1/sections/1', 1);
+INSERT INTO tb_notification (text, moment, read, route, user_id) VALUES ('Terceiro feedback: favor revisar', TIMESTAMP WITH TIME ZONE '2020-05-21T13:00:00Z', false, '/offers/1/resources/1/sections/1', 1);
 
 -- Deliveries from lesson-enrollment
 INSERT INTO tb_deliver (uri, moment, status, feedback, correct_count, lesson_id, user_id, offer_id) VALUES ('http://github.com/brandaogabriel', TIMESTAMP WITH TIME ZONE '2020-01-14T14:50:30Z', 0, null, null, 4, 1, 1);
