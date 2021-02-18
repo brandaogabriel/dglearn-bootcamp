@@ -3,6 +3,8 @@ package com.devgabriel.dglearn.dto;
 import com.devgabriel.dglearn.entities.User;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -10,6 +12,8 @@ public class UserDTO implements Serializable {
 	private Long id;
 	private String name;
 	private String email;
+
+	private List<RoleDTO> roles = new ArrayList<>();
 
 	public UserDTO() {
 	}
@@ -24,6 +28,7 @@ public class UserDTO implements Serializable {
 		id = entity.getId();
 		name = entity.getName();
 		email = entity.getEmail();
+		entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
 	}
 
 	public Long getId() {
@@ -48,5 +53,9 @@ public class UserDTO implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<RoleDTO> getRoles() {
+		return roles;
 	}
 }
