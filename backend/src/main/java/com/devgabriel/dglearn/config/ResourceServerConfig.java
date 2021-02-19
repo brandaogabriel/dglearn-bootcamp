@@ -31,7 +31,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	private static final String[] PUBLIC = {"/oauth/token", "/h2-console/**"};
 
-	private static final String[] ADMIN = {"/users/**"};
+	private static final String[] USERS_ROUTES = {"/users/**"};
 
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -47,8 +47,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 		http.authorizeRequests()
 				.antMatchers(PUBLIC).permitAll()
-				.antMatchers(HttpMethod.GET, ADMIN).hasRole("STUDENT")
-				.antMatchers(ADMIN).hasRole("ADMIN")
+				.antMatchers(HttpMethod.GET, USERS_ROUTES).hasAnyRole("STUDENT")
+				.antMatchers(HttpMethod.PUT, USERS_ROUTES).hasAnyRole("STUDENT", "INSTRUCTOR")
+				.antMatchers(USERS_ROUTES).hasRole("ADMIN")
 				.anyRequest().authenticated();
 
 		http.cors().configurationSource(corsConfigurationSource());

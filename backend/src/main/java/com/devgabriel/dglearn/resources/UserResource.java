@@ -2,6 +2,7 @@ package com.devgabriel.dglearn.resources;
 
 import com.devgabriel.dglearn.dto.UserDTO;
 import com.devgabriel.dglearn.dto.UserInsertDTO;
+import com.devgabriel.dglearn.dto.UserUpdateDTO;
 import com.devgabriel.dglearn.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 
@@ -42,11 +44,17 @@ public class UserResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<UserDTO> create(@RequestBody UserInsertDTO dto) {
+	public ResponseEntity<UserDTO> create(@Valid @RequestBody UserInsertDTO dto) {
 		UserDTO userDTO = service.create(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(userDTO.getId()).toUri();
 		return ResponseEntity.created(uri).body(userDTO);
+	}
+
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<UserDTO> update(@PathVariable Long id, @Valid @RequestBody UserUpdateDTO dto) {
+		UserDTO userDTO = service.update(id, dto);
+		return ResponseEntity.ok().body(userDTO);
 	}
 
 	@DeleteMapping(value = "/{id}")

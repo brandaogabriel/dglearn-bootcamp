@@ -3,6 +3,7 @@ package com.devgabriel.dglearn.services;
 import com.devgabriel.dglearn.dto.RoleDTO;
 import com.devgabriel.dglearn.dto.UserDTO;
 import com.devgabriel.dglearn.dto.UserInsertDTO;
+import com.devgabriel.dglearn.dto.UserUpdateDTO;
 import com.devgabriel.dglearn.entities.Role;
 import com.devgabriel.dglearn.entities.User;
 import com.devgabriel.dglearn.repositories.RoleRepository;
@@ -24,6 +25,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
@@ -66,7 +68,7 @@ public class UserService implements UserDetailsService {
 		return new UserDTO(user);
 	}
 
-	private void copyDtoToEntity(User user, UserInsertDTO dto) {
+	private void copyDtoToEntity(User user, UserDTO dto) {
 		user.setName(dto.getName());
 		user.setEmail(dto.getEmail());
 
@@ -76,6 +78,20 @@ public class UserService implements UserDetailsService {
 			user.getRoles().add(role);
 		}
 	}
+
+	@Transactional
+	public UserDTO update(Long id, UserUpdateDTO dto) {
+		authService.validateSelfOrAdmin(id);
+		try {
+			User user = repository.getOne(id);
+			copyDtoToEntity(user, dto);
+			user = repository.save(user);
+			return new UserDTO(user);
+		} catch(EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		}
+	}
+
 
 	public void delete(Long id) {
 		try {

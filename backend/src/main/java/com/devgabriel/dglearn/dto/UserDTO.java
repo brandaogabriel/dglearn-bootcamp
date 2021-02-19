@@ -2,6 +2,8 @@ package com.devgabriel.dglearn.dto;
 
 import com.devgabriel.dglearn.entities.User;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,11 @@ public class UserDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+
+	@NotBlank(message = "Campo nome é obrigatório")
 	private String name;
+
+	@Email(message = "E-mail inválido")
 	private String email;
 
 	private List<RoleDTO> roles = new ArrayList<>();
